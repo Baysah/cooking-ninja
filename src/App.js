@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+//styles
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+//Import Pages
+import HomePage from './Pages/homePage/HomePage';
+import RecipeDetails from './Pages/recipeDetails/RecipeDetails';
+import Search from './Pages/search/Search';
+import CreateRecipe from './Pages/create/CreateRecipe';
+import PageNotFound from './Pages/pageNotFound/404';
+
+//import other components
+import Layout from './components/Layout'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Layout>
+          <Routes>
+            <Route path="" element={<HomePage />} end />
+            <Route path="create" element={<CreateRecipe />} />
+            <Route path="search" element={<Search />} />
+            <Route path="recipes/:id" element={<RecipeDetails />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </Layout>
+      </div>
+    </Router>
   );
 }
 
